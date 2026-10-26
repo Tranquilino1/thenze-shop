@@ -117,7 +117,7 @@ export default function ProductCard({ product }) {
             title="Encargar directamente por WhatsApp"
           >
             <MessageCircle size={16} />
-            <span>Pedir por WhatsApp</span>
+            <span className="btn-wa-label">Pedir por WhatsApp</span>
           </button>
 
           {/* Add to Cart button */}
@@ -129,12 +129,12 @@ export default function ProductCard({ product }) {
             {isAdded ? (
               <>
                 <Check size={16} />
-                <span>Añadido</span>
+                <span className="btn-cart-label">Añadido</span>
               </>
             ) : (
               <>
                 <ShoppingBag size={16} />
-                <span>Añadir</span>
+                <span className="btn-cart-label">Añadir</span>
               </>
             )}
           </button>

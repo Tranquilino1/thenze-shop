@@ -5,6 +5,7 @@ import {
   LayoutGrid, 
   Grid, 
   Columns, 
+  Square,
   X,
   SlidersHorizontal 
 } from 'lucide-react';
@@ -133,31 +134,39 @@ export default function FilterBar() {
             </select>
           </div>
 
-          {/* Grid column toggles (Desktop) */}
+          {/* Grid column toggles (Desktop & Mobile) */}
           <div className="grid-toggle-buttons">
+            <button
+              className={`grid-view-btn mobile-grid-btn ${gridCols === 1 ? 'active' : ''}`}
+              onClick={() => setGridCols(1)}
+              title="Vista 1 columna (Detallada)"
+              aria-label="1 columna"
+            >
+              <Square size={14} />
+            </button>
             <button
               className={`grid-view-btn ${gridCols === 2 ? 'active' : ''}`}
               onClick={() => setGridCols(2)}
               title="Vista 2 columnas"
               aria-label="2 columnas"
             >
-              <Columns size={16} />
+              <Columns size={15} />
             </button>
             <button
-              className={`grid-view-btn ${gridCols === 3 ? 'active' : ''}`}
+              className={`grid-view-btn desktop-only ${gridCols === 3 ? 'active' : ''}`}
               onClick={() => setGridCols(3)}
               title="Vista 3 columnas"
               aria-label="3 columnas"
             >
-              <Grid size={16} />
+              <Grid size={15} />
             </button>
             <button
-              className={`grid-view-btn ${gridCols === 4 ? 'active' : ''}`}
+              className={`grid-view-btn desktop-only ${gridCols === 4 ? 'active' : ''}`}
               onClick={() => setGridCols(4)}
               title="Vista 4 columnas"
               aria-label="4 columnas"
             >
-              <LayoutGrid size={16} />
+              <LayoutGrid size={15} />
             </button>
           </div>
         </div>

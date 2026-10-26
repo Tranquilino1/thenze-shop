@@ -111,38 +111,18 @@ export default function Navbar({ onOpenAbout }) {
 
         {/* Right Action Icons */}
         <div className="header-actions">
-          {/* Search Toggle */}
-          <div className="search-wrapper">
-            {isSearchOpen ? (
-              <div className="search-input-box">
-                <input
-                  type="text"
-                  placeholder="Buscar prendas, marcas (Zara, Goku, Betis)..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  autoFocus
-                />
-                <button 
-                  className="search-close-btn"
-                  onClick={() => { setSearchQuery(''); setIsSearchOpen(false); }}
-                >
-                  <X size={16} />
-                </button>
-              </div>
-            ) : (
-              <button 
-                className="action-icon-btn" 
-                onClick={() => setIsSearchOpen(true)}
-                title="Buscar en catálogo"
-                aria-label="Buscar"
-              >
-                <Search size={20} />
-              </button>
-            )}
-          </div>
+          {/* Search Toggle Button */}
+          <button 
+            className={`action-icon-btn ${isSearchOpen ? 'active' : ''}`} 
+            onClick={() => setIsSearchOpen(!isSearchOpen)}
+            title="Buscar en catálogo"
+            aria-label="Buscar"
+          >
+            {isSearchOpen ? <X size={19} /> : <Search size={19} />}
+          </button>
 
-          {/* Location Badge */}
-          <div className="location-pill" title="Ubicación de la tienda">
+          {/* Location Badge (Desktop only) */}
+          <div className="location-pill hide-on-mobile" title="Ubicación de la tienda">
             <MapPin size={13} className="text-gold" />
             <span>Malabo, G.E.</span>
           </div>
@@ -155,12 +135,12 @@ export default function Navbar({ onOpenAbout }) {
             title="Ver cesta de pedidos"
           >
             <div className="cart-icon-wrapper">
-              <ShoppingBag size={20} />
+              <ShoppingBag size={19} />
               {cartItemCount > 0 && (
                 <span className="cart-badge">{cartItemCount}</span>
               )}
             </div>
-            <span className="cart-total-label">
+            <span className="cart-total-label hide-on-mobile">
               {cartTotal > 0 ? `${cartTotal.toLocaleString('es-ES')} CFA` : 'Bolsa'}
             </span>
           </button>
@@ -174,10 +154,41 @@ export default function Navbar({ onOpenAbout }) {
             title="Pedir por WhatsApp"
           >
             <MessageCircle size={17} />
-            <span className="wa-btn-text">Pedir</span>
+            <span className="wa-btn-text hide-on-mobile">Pedir</span>
           </a>
         </div>
       </div>
+
+      {/* Modern Expandable Search Bar (Responsive across all devices) */}
+      {isSearchOpen && (
+        <div className="header-search-bar">
+          <div className="search-bar-inner">
+            <Search size={18} className="search-bar-icon" />
+            <input
+              type="text"
+              placeholder="Buscar por prenda, anime, marca (Goku, Zara, Scarface, Betis)..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              autoFocus
+            />
+            {searchQuery && (
+              <button 
+                className="search-clear-btn" 
+                onClick={() => setSearchQuery('')}
+                aria-label="Borrar búsqueda"
+              >
+                <X size={15} />
+              </button>
+            )}
+            <button 
+              className="search-close-bar-btn"
+              onClick={() => { setSearchQuery(''); setIsSearchOpen(false); }}
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Mobile Drawer Navigation */}
       {isMobileMenuOpen && (
